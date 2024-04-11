@@ -1,0 +1,47 @@
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class UserAuthenticationIntegrationTest {
+
+    private UserAuthenticationService authService;
+    private DatabaseConnection dbConnection;
+
+    @Before
+    public void setUp() {
+        // Create mock objects for UserAuthenticationService and DatabaseConnection
+        authService = mock(UserAuthenticationService.class);
+        dbConnection = mock(DatabaseConnection.class);
+        
+        // Inject the mock database connection into the authentication service
+        authService.setDatabaseConnection(dbConnection);
+    }
+
+    @Test
+    public void testUserAuthentication() {
+        // Mock database query result
+        when(dbConnection.query("SELECT * FROM users WHERE username='testuser' AND password='password123'"))
+            .thenReturn(true); // Assuming user exists in the database with the provided credentials
+
+        // Perform authentication
+        boolean isAuthenticated = authService.authenticate("testuser", "password123");
+
+        // Verify that authentication is successful
+        assertEquals(true, isAuthenticated);
+    }
+
+    @Test
+    public void testInvalidCredentials() {
+        // Mock database query result
+        when(dbConnection.query("SELECT * FROM users WHERE username='invaliduser' AND password='invalidpassword'"))
+            .thenReturn(false); // Assuming user does not exist in the database with the provided credentials
+
+        // Perform authentication with invalid credentials
+        boolean isAuthenticated = authService.authenticate("invaliduser", "invalidpassword");
+
+        // Verify that authentication fails
+        assertEquals(false, isAuthenticated);
+    }
+}
