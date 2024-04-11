@@ -1,0 +1,41 @@
+Integration testing verifies the interactions between different modules or components of a software system to ensure they work together correctly. Here's an example of a test case for integration testing:
+
+Test Case: Integration Testing for User Authentication System
+Objective:
+To verify that the user authentication system integrates correctly with the database and user interface components.
+
+Preconditions:
+The user authentication system is deployed and accessible.
+The database is properly configured with test data.
+The user interface components are functional.
+Test Steps:
+Verify User Authentication:
+
+Input valid username and password.
+Click the "Login" button.
+Verify that the user is successfully authenticated and directed to the home page.
+Verify Invalid Credentials Handling:
+
+Input invalid username and password.
+Click the "Login" button.
+Verify that the system displays an error message indicating invalid credentials.
+Verify Account Lockout Feature:
+
+Input invalid credentials multiple times exceeding the maximum allowed attempts.
+Click the "Login" button.
+Verify that the system locks the user account and displays an appropriate message.
+Verify Forgot Password Functionality:
+
+Click the "Forgot Password" link.
+Enter a valid email address associated with the user account.
+Click the "Submit" button.
+Verify that the system sends a password reset link to the user's email address.
+Verify Password Reset Feature:
+
+Access the password reset link from the email.
+Enter a new password and confirm.
+Click the "Reset Password" button.
+Verify that the system updates the user's password and redirects to the login page.
+Postconditions:
+The user authentication system functions as expected, integrating seamlessly with the database and user interface components.
+Data integrity and security measures are maintained throughout the integration process.
